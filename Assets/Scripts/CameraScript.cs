@@ -8,6 +8,7 @@ public class CameraScript : MonoBehaviour
     public Transform player;
     public Transform playerObj;
     public Rigidbody playerRb;
+    public bool playerCaught = false;
 
 
     [SerializeField] float rotSpeed;
@@ -38,6 +39,9 @@ public class CameraScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        player.Translate(inputDir.normalized * movSpeed * Time.deltaTime);
+        if (!playerCaught)
+        {
+            player.Translate(inputDir.normalized * movSpeed * Time.deltaTime);
+        }
     }
 }
