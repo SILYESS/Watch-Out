@@ -38,15 +38,21 @@ public class DeathScript : MonoBehaviour
         {
             playerMoveScript.GetComponent<CameraScript>().playerCaught = true;
             deathAnim.Play("DeathStrike", 0);
-            transform.position = new Vector3(16.5f, -6.8f, -0.8f);
-            //Death animation missing 
-            player.SetActive(false);
-            deathAlive = false;
+            if (deathAnim.GetCurrentAnimatorStateInfo(0).IsName("DeathStrike") && deathAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.2f)
+            {
+                Invoke("KillThePlayer",0.6f);
+            }
             playerScript.haveKey = false;
         }
     }
     void SpawnDeath()
     {
         transform.position = new Vector3(5, 0, 29);
+    }
+    void KillThePlayer()
+    {
+        transform.position = new Vector3(16.5f, -6.8f, -0.8f);
+        //player.SetActive(false);
+        deathAlive = false;
     }
 }

@@ -23,14 +23,17 @@ public class CameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Rotate Orientation
-        Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
-        orientation.forward = viewDir;
+        if (!playerCaught)
+        {
+            //Rotate Orientation
+            Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
+            orientation.forward = viewDir;
 
-        //Rotate player
-        float vertInput = Input.GetAxisRaw("Vertical");
-        float horizInput = Input.GetAxisRaw("Horizontal");
-        inputDir = orientation.forward * vertInput + orientation.right * horizInput;
+            //Rotate player
+            float vertInput = Input.GetAxisRaw("Vertical");
+            float horizInput = Input.GetAxisRaw("Horizontal");
+            inputDir = orientation.forward * vertInput + orientation.right * horizInput;
+        }
 
         if(inputDir != Vector3.zero)
         {
